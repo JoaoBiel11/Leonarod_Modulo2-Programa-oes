@@ -1,8 +1,8 @@
-package com.example.atv10_04.Controller;
+package com.senai.Biblioteca.Controller;
 
-import com.example.atv10_04.DTO.ClienteDTO;
-import com.example.atv10_04.Entity.Cliente;
-import com.example.atv10_04.Service.ClienteService;
+import com.senai.Biblioteca.DTO.ClienteDTO;
+import com.senai.Biblioteca.Entity.Cliente;
+import com.senai.Biblioteca.Service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RequestMapping("/cliente")
 public class ClienteController {
 

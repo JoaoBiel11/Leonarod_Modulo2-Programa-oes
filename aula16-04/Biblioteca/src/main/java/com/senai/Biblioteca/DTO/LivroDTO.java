@@ -1,26 +1,27 @@
-package com.example.atv10_04.DTO;
+package com.senai.Biblioteca.DTO;
 
-import com.example.atv10_04.Entity.Livro;
+import com.senai.Biblioteca.Entity.Emprestimo;
+import com.senai.Biblioteca.Entity.Livro;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LivroDTO {
-
-    private Long idLivro;
+public class LivroDTO implements Serializable {
+    private Long id;
     private String nome;
     private String autor;
-    @Column(unique = true)
-    private String ISBN;
+    private int ISBN;
     private String genero;
 
     public Livro toLivro(){
         return new Livro(
-                this.idLivro,
+                this.id,
                 this.nome,
                 this.autor,
                 this.ISBN,
@@ -37,5 +38,4 @@ public class LivroDTO {
                 livro.getGenero()
         );
     }
-
 }

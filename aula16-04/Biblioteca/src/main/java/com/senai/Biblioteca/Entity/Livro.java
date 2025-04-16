@@ -1,14 +1,15 @@
-package com.example.atv10_04.Entity;
+package com.senai.Biblioteca.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
-
 
 @Entity
 @Data
@@ -20,14 +21,15 @@ public class Livro implements Serializable {
     private Long id;
     private String nome;
     private String autor;
-    private String ISBN;
     @Column(unique = true)
+    private int ISBN;
     private String genero;
 
     @ManyToMany(mappedBy = "livros")
+    @JsonIgnore
     private Set<Emprestimo> emprestimos;
 
-    public Livro(Long id, String nome, String autor, String  ISBN, String genero){
+    public Livro(Long id, String nome, String autor, int ISBN, String genero){
         this.id = id;
         this.nome = nome;
         this.autor = autor;

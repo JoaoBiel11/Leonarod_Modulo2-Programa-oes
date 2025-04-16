@@ -1,11 +1,8 @@
-package com.example.atv10_04.Controller;
+package com.senai.Biblioteca.Controller;
 
-import com.example.atv10_04.DTO.LivroDTO;
-import com.example.atv10_04.DTO.LivroDTO;
-import com.example.atv10_04.Entity.Livro;
-import com.example.atv10_04.Entity.Livro;
-import com.example.atv10_04.Service.LivroService;
-import com.example.atv10_04.Service.LivroService;
+import com.senai.Biblioteca.DTO.LivroDTO;
+import com.senai.Biblioteca.Entity.Livro;
+import com.senai.Biblioteca.Service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

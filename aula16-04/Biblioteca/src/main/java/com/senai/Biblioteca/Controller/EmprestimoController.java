@@ -1,8 +1,10 @@
-package com.example.atv10_04.Controller;
+package com.senai.Biblioteca.Controller;
 
-import com.example.atv10_04.DTO.EmprestimoDTO;
-import com.example.atv10_04.Entity.Emprestimo;
-import com.example.atv10_04.Service.EmprestimoService;
+import com.senai.Biblioteca.DTO.EmprestimoDTO;
+import com.senai.Biblioteca.DTO.LivroDTO;
+import com.senai.Biblioteca.Entity.Emprestimo;
+import com.senai.Biblioteca.Entity.Livro;
+import com.senai.Biblioteca.Service.EmprestimoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/emprestimo")
-
 public class EmprestimoController {
 
     @Autowired
@@ -36,12 +37,12 @@ public class EmprestimoController {
 
     @PostMapping
     public ResponseEntity<EmprestimoDTO> create(@RequestBody EmprestimoDTO emprestimoDTO){
-        EmprestimoDTO clienteDTOSave = emprestimoService.create(emprestimoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(clienteDTOSave);
+            EmprestimoDTO emprestimoDTOSave = emprestimoService.create(emprestimoDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(emprestimoDTOSave);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EmprestimoDTO> updateEmprestimo(@PathVariable Long id, @RequestBody EmprestimoDTO emprestimoDTO){
+    public ResponseEntity<EmprestimoDTO> update(@PathVariable Long id, @RequestBody EmprestimoDTO emprestimoDTO){
         Optional<EmprestimoDTO> emprestimoDTOOptional = emprestimoService.updateEmprestimo(id, emprestimoDTO);
         if(emprestimoDTOOptional.isPresent()){
             return ResponseEntity.ok(emprestimoDTOOptional.get());

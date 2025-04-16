@@ -1,18 +1,16 @@
-package com.example.atv10_04.DTO;
+package com.senai.Biblioteca.DTO;
 
-
-import com.example.atv10_04.Entity.Cliente;
-import com.example.atv10_04.Entity.Emprestimo;
+import com.senai.Biblioteca.Entity.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClienteDTO {
-
+public class ClienteDTO implements Serializable {
     private Long id;
     private String nome;
     private String sobrenome;
@@ -32,7 +30,7 @@ public class ClienteDTO {
                 cliente.getId(),
                 cliente.getNome(),
                 cliente.getSobrenome(),
-                cliente.getCpf()
+                cliente.getSobrenome()
         );
     }
 }

@@ -1,8 +1,8 @@
-package com.example.atv10_04.Service;
+package com.senai.Biblioteca.Service;
 
-import com.example.atv10_04.DTO.LivroDTO;
-import com.example.atv10_04.Entity.Livro;
-import com.example.atv10_04.Repository.LivroRepository;
+import com.senai.Biblioteca.DTO.LivroDTO;
+import com.senai.Biblioteca.Entity.Livro;
+import com.senai.Biblioteca.Repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LivroService{
+public class LivroService {
     @Autowired
     private LivroRepository livroRepository;
 
@@ -19,33 +19,31 @@ public class LivroService{
     }
 
     public Optional<LivroDTO> getById(Long id){
-        Optional<Livro> optionalLivro = livroRepository.findById(id);
-        LivroDTO livroDTO = new LivroDTO();
-        if(optionalLivro.isPresent()){
-            return Optional.of(livroDTO.fromLivro(optionalLivro.get()));
+        Optional<Livro> livroOptional = livroRepository.findById(id);
+        if(livroOptional.isPresent()){
+            LivroDTO livroDTO = new LivroDTO();
+            return Optional.of(livroDTO.fromLivro(livroOptional.get()));
         }else {
             return Optional.empty();
         }
     }
 
-    public LivroDTO create (LivroDTO livroDTO){
+    public LivroDTO create(LivroDTO livroDTO){
         Livro livro = livroDTO.toLivro();
         livro = livroRepository.save(livro);
         return livroDTO.fromLivro(livro);
     }
 
     public Optional<LivroDTO> updateLivro(Long id, LivroDTO livroDTO){
-        Optional<Livro> optionalLivro = livroRepository.findById(id);
-        if(optionalLivro.isPresent()){
-            Livro livro = optionalLivro.get();
+        Optional<Livro> livroOptional = livroRepository.findById(id);
+        if(livroOptional.isPresent()){
+            Livro livro = livroOptional.get();
             livro.setNome(livroDTO.getNome());
-            livro.setAutor(livroDTO.getAutor());
             livro.setISBN(livroDTO.getISBN());
-            livro.setEmprestimos(livroDTO.toLivro().getEmprestimos());
-
-            Livro livroUpdate = livroRepository.save(livro);
-
-            return Optional.of(livroDTO.fromLivro(livroUpdate));
+            livro.setAutor(livroDTO.getAutor());
+            livro.setGenero(livroDTO.getGenero());
+            livro = livroRepository.save(livro);
+            return Optional.of(livroDTO.fromLivro(livro));
         }else {
             return Optional.empty();
         }

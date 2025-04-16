@@ -1,5 +1,7 @@
-package com.example.atv10_04.Entity;
+package com.senai.Biblioteca.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,7 +27,6 @@ public class Emprestimo implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
-    @JsonManagedReference
     private Cliente cliente;
 
     @ManyToMany
@@ -33,5 +35,5 @@ public class Emprestimo implements Serializable {
             joinColumns = @JoinColumn(name = "emprestimo_id"),
             inverseJoinColumns = @JoinColumn(name = "livro_id")
     )
-    private Set<Livro> livros;
+    private List<Livro> livros;
 }

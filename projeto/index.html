@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Biblioteca</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Gerenciador de Biblioteca</h1>
+
+  <section>
+    <h2>Adicionar Cliente</h2>
+    <input id="nome" placeholder="Nome">
+    <input id="sobrenome" placeholder="Sobrenome">
+    <input id="cpf" placeholder="CPF">
+    <button onclick="adicionarCliente()">Salvar Cliente</button>
+  </section>
+
+  <section>
+    <h2>Adicionar Livro</h2>
+    <input id="nomeLivro" placeholder="Nome do Livro">
+    <input id="autorLivro" placeholder="Autor">
+    <input id="generoLivro" placeholder="Gênero">
+    <input id="isbnLivro" placeholder="ISBN">
+    <button onclick="adicionarLivro()">Salvar Livro</button>
+  </section>
+
+  <section>
+    <h2>Adicionar Empréstimo</h2>
+    <input id="idCliente" placeholder="ID do Cliente">
+    <input id="dataInicial" type="date">
+    <input id="dataFinal" type="date">
+    <input id="livrosIds" placeholder="IDs dos Livros (ex: 1,2)">
+    <button onclick="adicionarEmprestimo()">Salvar Empréstimo</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

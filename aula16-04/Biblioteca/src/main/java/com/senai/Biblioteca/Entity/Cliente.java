@@ -1,12 +1,15 @@
-package com.example.atv10_04.Entity;
+package com.senai.Biblioteca.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,8 +26,8 @@ public class Cliente implements Serializable {
     private String cpf;
 
     @OneToMany(mappedBy = "cliente")
-    @JsonBackReference
-    private Set<Emprestimo> emprestimo;
+    @JsonIgnore
+    private List<Emprestimo> emprestimo; // estrutura Set tem o mesmo funcionamento do List, porém evitando a duplicidade de valores
 
     public Cliente(Long id, String nome, String sobrenome, String cpf){
         this.id = id;

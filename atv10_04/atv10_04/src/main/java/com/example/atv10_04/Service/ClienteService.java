@@ -17,24 +17,6 @@ private ClienteRepository clienteRepository;
 
 
 //converte clienteDTO em cliente
-public Cliente fromDTO(ClienteDTO clienteDTO){
-    Cliente cliente = new Cliente();
-    cliente.setNome(clienteDTO.getNome());
-    cliente.setSobrenome(clienteDTO.getSobrenome());
-    cliente.setCpf(cliente.getCpf());
-
-    return cliente;
-}
-
-public ClienteDTO toDTO(Cliente cliente){
-    ClienteDTO clienteDTO = new ClienteDTO();
-    clienteDTO.setId(cliente.getIdCliente());
-    clienteDTO.setNome(cliente.getNome());
-    clienteDTO.setSobrenome(cliente.getSobrenome());
-    clienteDTO.setCpf(cliente.getCpf());
-
-    return clienteDTO;
-}
 
 public List<Cliente> getAll(){
     return clienteRepository.findAll();
@@ -43,16 +25,17 @@ public List<Cliente> getAll(){
 public Optional<ClienteDTO> getById(Long id){
     Optional<Cliente> optionalCliente = clienteRepository.findById(id);
     if(optionalCliente.isPresent()){
-        return Optional.of(this.toDTO(optionalCliente.get()));
+        ClienteDTO produtoDTO = new ClienteDTO();
+        return Optional.of(produtoDTO.fromCliente(optionalCliente.get()));
     }else {
         return Optional.empty();
     }
 }
 
-public ClienteDTO save(ClienteDTO clienteDTO){
-    Cliente cliente = this.fromDTO(clienteDTO);
-    Cliente clienteBd = clienteRepository.save(cliente);
-    return this.toDTO(clienteBd);
+public ClienteDTO create (ClienteDTO clienteDTO){
+    Cliente cliente = clienteDTO.toCliente();
+    cliente = clienteRepository.save(cliente);
+    return clienteDTO.fromCliente(cliente);
 }
 
 public Optional<ClienteDTO> updateCliente(Long id, ClienteDTO clienteDTO){
@@ -60,11 +43,10 @@ public Optional<ClienteDTO> updateCliente(Long id, ClienteDTO clienteDTO){
     if(optionalCliente.isPresent()){
         Cliente cliente = optionalCliente.get();
         cliente.setNome(clienteDTO.getNome());
+        cliente.setSobrenome(clienteDTO.getSobrenome());
         cliente.setCpf(clienteDTO.getCpf());
-
-        Cliente professorUpdate = clienteRepository.save(cliente);
-
-        return Optional.of(this.toDTO(professorUpdate));
+        cliente = clienteRepository.save(cliente);
+        return Optional.of(clienteDTO.fromCliente(cliente));
     }else {
         return Optional.empty();
     }
